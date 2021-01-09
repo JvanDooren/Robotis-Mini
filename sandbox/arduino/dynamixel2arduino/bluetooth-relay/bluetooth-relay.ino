@@ -17,11 +17,11 @@ float goalPos;
 
 // > hcitool scan
 // > sudo rfcomm connect 1 01:1E:09:0F:0A:15
-// > sudo cat /dev/rfcomm1 or screen /dev/rfcomm1 57600
+// > sudo cat /dev/rfcomm1 or screen /dev/rfcomm1 115200
 // > sudo rfcomm release 1 or CTRL-C
 //https://emanual.robotis.com/docs/en/parts/communication/bt-210/
-// probably need to change baudrate through AT+BTUART command
-#define BLUETOOTH_BAUDRATE 57600
+// default baudrate is set to 57600, change baudrate through AT+BTUART command
+#define BLUETOOTH_BAUDRATE 115200
 
 void setPosition(uint8_t id, float value) {
   dxl.setGoalPosition(id, value);
@@ -30,6 +30,7 @@ void setPosition(uint8_t id, float value) {
 
 void setup() {
   // put your setup code here, to run once:
+  while (!Serial) ;
   Serial.begin(115200);
   Serial1.setDxlMode(true);
   dxl.begin(1000000);
@@ -76,22 +77,10 @@ void setup() {
 
 
 void loop() {
-  //write( port number, left LED(blue), unused, right LED(yellow) )
-  myLed.write(LED_PORT, 1, 0, 0);
-  delay(1000);
-  myLed.write(LED_PORT, 0, 0, 1);
   delay(1000);
 
   Serial.print("IR Sensor ADC = ");
   int adc = myIR.read(IR_PORT, IR_SENSOR);//read ADC value from OLLO port 4
   Serial.println(adc);
   Serial2.println(adc);
-
-  if (adc < 100) {
-    setPosition(17, DEGREES2RAW(0));
-  }
-  else {
-    setPosition(17, DEGREES2RAW(30));
-  }
-  
 }
