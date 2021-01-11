@@ -15,13 +15,13 @@ float goalPos;
 #define LED_PORT (3)
 #define IR_PORT (4)
 
+#define BLUETOOTH_BAUDRATE 1382400
 // > hcitool scan
 // > sudo rfcomm connect 1 01:1E:09:0F:0A:15
-// > sudo cat /dev/rfcomm1 or screen /dev/rfcomm1 115200
+// > sudo cat /dev/rfcomm1 or screen /dev/rfcomm1 1382400
 // > sudo rfcomm release 1 or CTRL-C
 //https://emanual.robotis.com/docs/en/parts/communication/bt-210/
 // default baudrate is set to 57600, change baudrate through AT+BTUART command
-#define BLUETOOTH_BAUDRATE 115200
 
 void setPosition(uint8_t id, float value) {
   dxl.setGoalPosition(id, value);
