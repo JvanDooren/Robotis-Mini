@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+
+build/**
+**/CMakeFiles/**
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+sandbox/arduino/dynamixel2arduino/bluetooth-throughput/analyzer/tput
