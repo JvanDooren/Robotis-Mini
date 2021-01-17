@@ -10,12 +10,10 @@ DynamixelWorkbench dxl_wb;
 
 void setPosition(uint8_t id, int value) {
   dxl_wb.goalPosition(id, value);
-  //delayMicroseconds(150);// wait for the response to pass, default sent after 50us 
 }
 
 void setup() 
 {
-  while (!Serial) ;
   Serial.begin(115200);  
 
   const char *workbench_error;
