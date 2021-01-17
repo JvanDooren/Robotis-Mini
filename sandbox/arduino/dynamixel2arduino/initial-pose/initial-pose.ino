@@ -1,4 +1,3 @@
-#include <actuator.h>
 #include <Dynamixel2Arduino.h>
 #include <OLLO.h>
 
@@ -7,8 +6,6 @@ OLLO myIR;
 
 const int DXL_DIR_PIN = 28;
 Dynamixel2Arduino dxl(Serial1, DXL_DIR_PIN);
-
-float goalPos;
 
 #define DEGREES2RAW(x) (512 + (x/0.29))
 
@@ -32,7 +29,6 @@ void setup() {
   Serial.println(dxl.getPortBaud());
   Serial.println(dxl.scan());
   
-  goalPos = 400;
   //left arm
   setPosition(1, DEGREES2RAW(0));
   setPosition(3, DEGREES2RAW(-73.24));
@@ -66,23 +62,6 @@ void setup() {
 
 
 void loop() {
-#if 0
-  Serial.print("Press any key to continue! (or press q to quit!)\n");
-
-  while(Serial.available()==0);
-
-    int ch;
-
-    ch = Serial.read();
-    if (ch == 'q')
-      return;
-
-  // put your main code here, to run repeatedly:
-    dxl.setGoalPosition(1, goalPos); //use default encoder value
-    if (goalPos == 400) goalPos = 600;
-    else goalPos = 400;
-#endif
-
   //write( port number, left LED(blue), unused, right LED(yellow) )
   myLed.write(LED_PORT, 1, 0, 0);
   delay(1000);
