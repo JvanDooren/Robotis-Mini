@@ -37,3 +37,4 @@ CMakeCache.txt
 cmake_install.cmake
 Makefile
 sandbox/arduino/dynamixel2arduino/bluetooth-throughput/analyzer/tput
+sandbox/arduino/dynamixel2arduino/bluetooth-throughput/analyzer/consoletable_ext-prefix/**

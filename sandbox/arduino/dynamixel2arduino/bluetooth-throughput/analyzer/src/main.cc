@@ -13,21 +13,56 @@ using namespace std;
 
 #include <chrono>
 
-static unsigned long previous_remote_micros;
-static chrono::time_point<chrono::steady_clock> previous_time_point = chrono::steady_clock::now();
+#include "CppConsoleTable/CppConsoleTable.hpp"
 
-static void writeTimestampToFile(unsigned long remote_micros, char* filename) {
-    auto now = chrono::steady_clock::now();
-    auto local_delta = chrono::duration_cast<chrono::microseconds>(now - previous_time_point).count();
-    previous_time_point = now;
+// for convenience
+using ConsoleTable = samilton::ConsoleTable;
 
-    cout << "Got timestamp " << remote_micros << endl;
+static chrono::time_point<chrono::steady_clock> time_point_first_sample;
 
-    auto remote_delta = remote_micros - previous_remote_micros;
-    previous_remote_micros = remote_micros;
+static unsigned long expectedBytesPerSecond = 0;
+static unsigned long measuredBytesPerSecond = 0;
 
-    cout << "Remote delta micros " << remote_delta << endl;
-    cout << "Local delta micros " << local_delta << endl;
+static unsigned long nr_received_samples = 0;
+static constexpr unsigned int sample_size_bytes = 4;
+static constexpr unsigned int expected_nr_samples = 100000;
+
+static void outputResults() {
+    ConsoleTable table(1, 1, samilton::Alignment::centre);
+
+    // headers
+	table[0][0] = "expected B/s";
+    table[0][1] = "measured B/s";
+    table[0][2] = "efficiency";
+    table[0][3] = "delta";
+    table[0][4] = "delta rate B/s";
+
+    table[1][0] = expectedBytesPerSecond;
+    table[1][1] = measuredBytesPerSecond;
+    table[1][2] = "0.0%";
+    table[1][3] = 0;
+    table[1][4] = 0;
+
+	cout << table;
+}
+
+static void handleRemoteTimestamp(unsigned long remote_micros) {
+    if (nr_received_samples == 0) {
+        time_point_first_sample = chrono::steady_clock::now();
+    }
+    nr_received_samples++;
+    if (nr_received_samples % 1000 == 0) cout << "samples " << nr_received_samples << endl;
+
+    if (nr_received_samples == expected_nr_samples) {
+        auto local_delta_millis = chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - time_point_first_sample).count();
+        // average
+        //cout << "local delta ms " << local_delta_millis << endl;
+
+        measuredBytesPerSecond = (1000 * nr_received_samples * sample_size_bytes) / local_delta_millis;
+        outputResults();
+    }
+
+    //cout << "Got timestamp " << remote_micros << endl;
 }
 
 static speed_t toSpeed(unsigned int baud) {
@@ -75,9 +110,9 @@ static speed_t toSpeed(unsigned int baud) {
 
 int main(int argc, char** argv) {
     // open the serial port passed as argument and output to file
-    if (argc != 4) {
-        cout << "This program should be called with arguments {serial-port} {baudrate} {output-filename}" << endl;
-        cout << "For instance " << argv[0] << " /dev/rfcomm1 115200 throughput.txt" << endl;
+    if (argc != 3) {
+        cout << "This program should be called with arguments {serial-port} {baudrate}" << endl;
+        cout << "For instance " << argv[0] << " /dev/rfcomm1 115200" << endl;
         return 0;
     }
 
@@ -129,6 +164,8 @@ int main(int argc, char** argv) {
 
     cfsetspeed(&tty, toSpeed(baud));
 
+    expectedBytesPerSecond = baud / 8;
+
     // Save tty settings, also checking for error
     if (tcsetattr(serial_port, TCSANOW, &tty) != 0) {
         cout << "Error " << errno << " from tcsetattr: " << strerror(errno) << endl;
@@ -136,31 +173,30 @@ int main(int argc, char** argv) {
     }
 
     // Allocate memory for read buffer, set size according to your needs
-    char read_buf[4];
+    char read_buf[4096];
     int num_bytes = 0;
     int offset = 0;
     int total_read = 0;
+    int received_nr_bytes = 0;
+    unsigned long timestamp;
     while (1) {
         num_bytes = read(serial_port, &read_buf[offset], sizeof(read_buf)-offset);
-        /*cout << "Got " << num_bytes << " bytes" << endl;
-        for (int i=0; i<num_bytes; i++) {
+        /*for (int i=0; i<num_bytes; i++) {
             cout << "b[" << i << "]=0x" << std::hex << ((unsigned int)read_buf[i] & 0x000000FF) << std::dec << endl;
         }*/
+        received_nr_bytes += num_bytes;
         total_read += num_bytes;
-        if (total_read == sizeof(read_buf)) {
-            offset = 0;
-            total_read = 0;
-            //litte-endian
-            unsigned long timestamp = (read_buf[3] << 24) & 0xFF000000 | (read_buf[2] << 16) & 0x00FF0000 | (read_buf[1] << 8) & 0x0000FF00 | (read_buf[0] << 0) & 0x000000FF;
-            writeTimestampToFile(timestamp, argv[3]);
+        if (num_bytes > 0) {
+            cout << "Got " << num_bytes << " bytes" << endl;
+            cout << "Received total " << received_nr_bytes << " bytes" << endl;
         }
-        else if (num_bytes >= 0) {
-            offset = total_read;
+        while (total_read >= sample_size_bytes) {
+            timestamp = (read_buf[3] << 24) & 0xFF000000 | (read_buf[2] << 16) & 0x00FF0000 | (read_buf[1] << 8) & 0x0000FF00 | (read_buf[0] << 0) & 0x000000FF;
+            handleRemoteTimestamp(timestamp);
+            total_read -= sample_size_bytes;
+            memmove(read_buf, &read_buf[4], total_read);
         }
-        else {
-            cout << "Error reading: " << strerror(errno) << endl;
-            return 1;
-        }
+        offset = total_read;
     }
 
     close(serial_port);
