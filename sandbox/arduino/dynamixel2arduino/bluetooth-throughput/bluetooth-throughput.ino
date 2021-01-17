@@ -20,10 +20,12 @@ void setup() {
   {
     ts_value = micros();
     //Serial.println(ts_value);
-    while (Serial2.availableForWrite() < 4);
     Serial2.write((uint8_t *)&ts_value, 4);
-    Serial2.flush();
-    delayMicroseconds(135);//135==ok, resulting in 22500 bytes/sec
+    //Serial2@baudrate 1382400, delay of 173us==ok, resulting in 21500 bytes/sec
+    //Serial2@baudrate 230400, delay of 3us==ok, resulting in 22900 bytes/sec
+    //since the highest baudrate leaves me 173us to do something else, we'll stick to that
+    //that will be the most efficient
+    delayMicroseconds(173);
     
   }
   Serial.println("Done");
