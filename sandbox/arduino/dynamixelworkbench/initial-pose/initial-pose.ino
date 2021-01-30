@@ -14,7 +14,7 @@
 #define LENGTH_XL320_GOAL_POSITION        2
 #define SYNC_GOAL_POSITION_HANDLER_INDEX  0
 
-//#define SYNC_WRITE
+#define SYNC_WRITE
 
 OLLO myLed;
 DynamixelWorkbench dxl_wb;
@@ -119,6 +119,7 @@ void setup()
       DEGREES2RAW(73.24),//4
       DEGREES2RAW(0),//5
       DEGREES2RAW(0),//6
+      DEGREES2RAW(0),//7
       DEGREES2RAW(0),//8
       DEGREES2RAW(-26.37),//9
       DEGREES2RAW(26.37),//10
