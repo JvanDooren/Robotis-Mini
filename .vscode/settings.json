@@ -3,5 +3,7 @@
         "iosfwd": "cpp",
         "chrono": "cpp"
     },
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
 }
