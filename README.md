@@ -1,6 +1,30 @@
 # Robotis-Mini
 Robotis Mini Arduino IDE code, ROS2 interface
 
+# Setup ROS2 development machine
+
+1. First install Ubuntu 20.04 Focal
+2. Install ROS2 by following https://index.ros.org/doc/ros2/Installation/Foxy/Linux-Install-Debians/
+3. Install ROS2 xacro by `sudo apt install ros-$ROS_DISTRO-xacro`
+4. Install VSCode
+5. Setup Robotis Mini by following https://emanual.robotis.com/docs/en/software/arduino_ide/
+6. Install colcon by `sudo apt install python3-colcon-common-extensions`
+7. Install rosdep2 by `sudo apt install python3-rosdep2 && rosdep update`
+
+# Setup ROS2 simulator
+We're going to utilize Webots, so follow https://github.com/cyberbotics/webots_ros2/wiki/Getting-Started
+
+1. Install `sudo apt-get install ros-$ROS_DISTRO-webots-ros2`
+2. To check whether it is installed correctly, run `ros2 launch webots_ros2_demos armed_robots.launch.py`
+
+# Building ROS2 packages
+
+1. Change to the ros2_ws folder `cd Robotis-Mini/ros2_ws`
+2. Check before building that all dependencies have been met `rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y`
+3. Build all packages in the workspace folder: `colcon build`
+4. To let ROS2 find our own built packages, add the workspace folder to the ROS2 path `. install/setup.bash`
+5. Run the bt210_bridge `ros2 run bt210_bridge bt210bridge`
+
 ## Set BT-210 baudrate
 The BT-210 is default set to 57600 baud, which is too slow for relaying state.
 Follow the instructions at https://emanual.robotis.com/docs/en/parts/communication/bt-210/ to set to a higher baudrate.

@@ -40,3 +40,6 @@ sandbox/arduino/dynamixel2arduino/bluetooth-throughput/analyzer/consoletable_ext
 sandbox/arduino/dynamixel2arduino/bluetooth-throughput/analyzer/bt210-throughput
 ros1_ws/build/**
 ros1_ws/devel/**
+ros2_ws/build/**
+ros2_ws/install/**
+ros2_ws/log/**

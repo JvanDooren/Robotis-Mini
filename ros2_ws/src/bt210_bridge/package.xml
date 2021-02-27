@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>bt210_bridge</name>
+  <version>0.0.1</version>
+  <description>
+  This creates a message bridge (ROS2 node) between the Robotis Mini BT210 and a PC.
+  It's a bi-directional bridge, supporting reading the state of the servo's and sensors, as well as drive the sensors
+  </description>
+  <maintainer email="dooren20@xs4all.nl">Jeroen van Dooren</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+    <depend>rclcpp</depend>
+    <depend>bt210_interface</depend>
+  </export>
+</package>
