@@ -24,6 +24,7 @@ We're going to utilize Webots, so follow https://github.com/cyberbotics/webots_r
 3. Build all packages in the workspace folder: `colcon build`
 4. To let ROS2 find our own built packages, add the workspace folder to the ROS2 path `. install/setup.bash`
 5. Run the bt210_bridge `ros2 run bt210_bridge bt210bridge`
+6. Convert the .xacro to .proto file for webots `ros2 run webots_ros2_importer xacro2proto --disable-mesh-optimization --output=robotis_mini_description/proto/RobotisMini.proto robotis_mini_description/urdf/robotis_mini.urdf.xacro`
 
 ## Set BT-210 baudrate
 The BT-210 is default set to 57600 baud, which is too slow for relaying state.
