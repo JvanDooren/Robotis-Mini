@@ -1,0 +1,31 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  info [
+    "Simple Robotis Mini simulation."
+  ]
+  title "ROS2 Robotis Mini"
+  basicTimeStep 20
+  contactProperties [
+    ContactProperties {
+      material2 "thymio body"
+      coulombFriction [
+        0.7
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.3684884800408451 0.4395582771551476 0.8191488027590508 1.9380979493397665
+  position 2.9156273810553435 0.3140224990728897 1.958676585024061
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+CircleArena {
+  rotation 1 0 0 1.5707996938995747
+  wallThickness 0.05
+}
+RobotisMini {
+  translation 0 0 0.15
+}
