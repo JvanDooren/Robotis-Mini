@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="robotis_mini_head" params="parent">
+    <xacro:robotis_mini_servo_rotating name="neck" parent="${parent}"
+        xyz="0 0.036 0.006" rpy="${M_PI/2} ${M_PI} 0" initial_rotation="0" reflect="-1" />
+    <xacro:robotis_mini_dmff01 name="body_head" parent="neck_link"
+        xyz="0 -0.021 0.002" rpy="${M_PI/2} ${M_PI} 0" />
+  </xacro:macro>
+  
+</robot>

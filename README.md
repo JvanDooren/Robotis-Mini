@@ -10,6 +10,7 @@ Robotis Mini Arduino IDE code, ROS2 interface
 5. Setup Robotis Mini by following https://emanual.robotis.com/docs/en/software/arduino_ide/
 6. Install colcon by `sudo apt install python3-colcon-common-extensions`
 7. Install rosdep2 by `sudo apt install python3-rosdep2 && rosdep update`
+8. Download MeshLab for meshes by following https://www.meshlab.net/#download. This can be used to fine-tune values in the xacro files by loading a mesh. See http://gazebosim.org/tutorials?tut=inertia&cat=build_robot
 
 # Setup ROS2 simulator
 We're going to utilize Webots, so follow https://github.com/cyberbotics/webots_ros2/wiki/Getting-Started
