@@ -8,4 +8,4 @@ renderingMode: PLAIN
 orthographicViewHeight: 1
 textFiles: 0 "controllers/robotis_mini_move_head/robotis_mini_move_head.cpp"
 consoles: Console:All:All
-renderingDevicePerspectives: RobotisMini:camera;1;0.28125;0;0
+renderingDevicePerspectives: RobotisMini:camera;1;0.28125;0.0166028;0.00920245

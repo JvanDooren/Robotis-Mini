@@ -30,6 +30,8 @@ CircleArena {
   wallThickness 0.05
 }
 RobotisMini {
-  translation 0 0 0.15
+  hidden rotation_15 0 0 1 1.5707960003808226
+  hidden rotation_40 0 0 -1 1.5707960003807782
+  translation 0 0 0.16
   controller "robotis_mini_move_head"
 }

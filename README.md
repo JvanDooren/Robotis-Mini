@@ -28,6 +28,8 @@ We're going to utilize Webots, so follow https://github.com/cyberbotics/webots_r
 2. To check whether it is installed correctly, run `ros2 launch webots_ros2_demos armed_robots.launch.py`
 3. Start the webots simulator and load the world `webots_ws/robotis_mini/worlds/empty.wbt`
 
+A nice tutorial can be found at `https://www.youtube.com/watch?v=jU_FD1_zAqo&list=PLt69C9MnPchkP0ZXZOqmIGRTOch8o9GiQ`
+
 ## Set BT-210 baudrate
 The BT-210 is default set to 57600 baud, which is too slow for relaying state.
 Follow the instructions at https://emanual.robotis.com/docs/en/parts/communication/bt-210/ to set to a higher baudrate.
@@ -40,3 +42,7 @@ After some tests, it appears that the max rate the BT-210 can withstand internal
 ## Arduino source
 
 https://github.com/chcbaram/OpenCM9.04/tree/master/hardware/robotis/OpenCM9.04/cores/arduino
+
+## Mathmatical docs
+
+https://cris.maastrichtuniversity.nl/ws/portalfiles/portal/33237631/c6330.pdf
