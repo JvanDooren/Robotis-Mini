@@ -12,12 +12,6 @@ Robotis Mini Arduino IDE code, ROS2 interface
 7. Install rosdep2 by `sudo apt install python3-rosdep2 && rosdep update`
 8. Download MeshLab for meshes by following https://www.meshlab.net/#download. This can be used to fine-tune values in the xacro files by loading a mesh. See http://gazebosim.org/tutorials?tut=inertia&cat=build_robot
 
-# Setup ROS2 simulator
-We're going to utilize Webots, so follow https://github.com/cyberbotics/webots_ros2/wiki/Getting-Started
-
-1. Install `sudo apt-get install ros-$ROS_DISTRO-webots-ros2`
-2. To check whether it is installed correctly, run `ros2 launch webots_ros2_demos armed_robots.launch.py`
-
 # Building ROS2 packages
 
 1. Change to the ros2_ws folder `cd Robotis-Mini/ros2_ws`
@@ -26,6 +20,13 @@ We're going to utilize Webots, so follow https://github.com/cyberbotics/webots_r
 4. To let ROS2 find our own built packages, add the workspace folder to the ROS2 path `. install/setup.bash`
 5. Run the bt210_bridge `ros2 run bt210_bridge bt210bridge`
 6. Convert the .xacro to .proto file for webots `ros2 run webots_ros2_importer xacro2proto --disable-mesh-optimization --output=../webots_ws/robotis_mini/protos/RobotisMini.proto src/robotis_mini_description/urdf/robotis_mini.urdf.xacro`
+
+# Setup ROS2 simulator
+We're going to utilize Webots, so follow https://github.com/cyberbotics/webots_ros2/wiki/Getting-Started
+
+1. Install `sudo apt-get install ros-$ROS_DISTRO-webots-ros2`
+2. To check whether it is installed correctly, run `ros2 launch webots_ros2_demos armed_robots.launch.py`
+3. Start the webots simulator and load the world `webots_ws/robotis_mini/worlds/empty.wbt`
 
 ## Set BT-210 baudrate
 The BT-210 is default set to 57600 baud, which is too slow for relaying state.
