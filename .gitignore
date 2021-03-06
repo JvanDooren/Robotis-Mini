@@ -43,3 +43,4 @@ ros1_ws/devel/**
 ros2_ws/build/**
 ros2_ws/install/**
 ros2_ws/log/**
+webots_ws/robotis_mini/controllers/build/**

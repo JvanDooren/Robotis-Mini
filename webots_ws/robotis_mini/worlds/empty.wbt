@@ -31,4 +31,5 @@ CircleArena {
 }
 RobotisMini {
   translation 0 0 0.15
+  controller "robotis_mini_move_head"
 }
