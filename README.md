@@ -11,6 +11,7 @@ Robotis Mini Arduino IDE code, ROS2 interface
 6. Install colcon by `sudo apt install python3-colcon-common-extensions`
 7. Install rosdep2 by `sudo apt install python3-rosdep2 && rosdep update`
 8. Download MeshLab for meshes by following https://www.meshlab.net/#download. This can be used to fine-tune values in the xacro files by loading a mesh. See http://gazebosim.org/tutorials?tut=inertia&cat=build_robot
+Filters - Quality Measure and Computations - Compute Geometric Measures
 
 # Building ROS2 packages
 
@@ -19,7 +20,7 @@ Robotis Mini Arduino IDE code, ROS2 interface
 3. Build all packages in the workspace folder: `colcon build`
 4. To let ROS2 find our own built packages, add the workspace folder to the ROS2 path `. install/setup.bash`
 5. Run the bt210_bridge `ros2 run bt210_bridge bt210bridge`
-6. Convert the .xacro to .proto file for webots `ros2 run webots_ros2_importer xacro2proto --disable-mesh-optimization --output=../webots_ws/robotis_mini/protos/RobotisMini.proto src/robotis_mini_description/urdf/robotis_mini.urdf.xacro`
+6. Convert the .xacro to .proto file for webots `ros2 run webots_ros2_importer xacro2proto --disable-mesh-optimization --output=../webots_ws/robotis_mini/protos/RobotisMini.proto src/robotis_mini_description/urdf/robotis_mini.urdf.xacro` Note: conversion works from the installed xacro files, not from the source repo, so a `colcon build` is required to install the files. Center of mass specified as 0 0 0 in xacro causes it not being picked up into the .proto file, causing a warning.
 
 # Setup ROS2 simulator
 We're going to utilize Webots, so follow https://github.com/cyberbotics/webots_ros2/wiki/Getting-Started

@@ -361,7 +361,7 @@
         <material name="White" />
       </visual>
       <inertial>
-        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <origin xyz="-0.000001 0.000001 -0.000001" rpy="0 0 0" />
         <mass value="${MASS_SPD3B3}" />
         <inertia
             ixx="${13782.404297 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
@@ -392,7 +392,7 @@
         <material name="White" />
       </visual>
       <inertial>
-        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <origin xyz="-0.000001 0.000001 -0.000001" rpy="0 0 0" />
         <mass value="${MASS_SPD3B5}" />
         <inertia
             ixx="${24062.111328 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
@@ -416,14 +416,14 @@
     </joint>
     <link name="${name}_link">
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
         <geometry>
           <mesh filename="package://robotis_mini_description/meshes/SPD-3B7(W).stl" scale="${STL_SCALE}" />
         </geometry>
         <material name="White" />
       </visual>
       <inertial>
-        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <origin xyz="-0.000001 0.000001 -0.000001" rpy="0 0 0" />
         <mass value="${MASS_SPD3B7}" />
         <inertia
             ixx="${34343.71875 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
@@ -447,14 +447,14 @@
     </joint>
     <link name="${name}_link">
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
         <geometry>
           <mesh filename="package://robotis_mini_description/meshes/SPD-4B5(W).stl" scale="${STL_SCALE}" />
         </geometry>
         <material name="White" />
       </visual>
       <inertial>
-        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <origin xyz="-0.000001 0.000001 -0.000001" rpy="0 0 0" />
         <mass value="${MASS_SPD4B5}" />
         <inertia
             ixx="${56062.675781 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
@@ -578,7 +578,7 @@
         <material name="White" />
       </visual>
       <inertial>
-        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <origin xyz="-0.000001 0.000001 -0.000001" rpy="0 0 0" />
         <mass value="${MASS_LB040}" />
         <inertia
             ixx="${0.056 * (0.022*0.022 + 0.022*0.022) / 12}" ixy="0.0" ixz="0.0"
