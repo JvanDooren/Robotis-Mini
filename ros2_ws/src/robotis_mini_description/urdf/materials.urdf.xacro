@@ -22,7 +22,7 @@
   </material>
   
   <material name="White">
-    <color rgba="1.0 1.0 1.0 1.0"/>
+    <color rgba="0.8 0.8 0.8 1.0"/>
   </material>
 
   <material name="Black">
