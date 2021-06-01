@@ -32,7 +32,11 @@ We're going to utilize Webots, so follow https://github.com/cyberbotics/webots_r
 A nice tutorial can be found at `https://www.youtube.com/watch?v=jU_FD1_zAqo&list=PLt69C9MnPchkP0ZXZOqmIGRTOch8o9GiQ`
 
 # Launch the WeBots with our robot
-`Robotis-Mini/webots_ws/robotis_mini$ ros2 launch example.launch.py`
+A convenience python scipt has been created to launch Webots and nodes. To make the nodes discoverable:
+`cd Robotis-Mini/webots_ws/robotis_mini`
+`. ../../ros2_ws/install/setup.bash`
+`ros2 launch robotis.launch.py`
+Once Webots is running, discover services: `ros2 service list`
 
 ## Set BT-210 baudrate
 The BT-210 is default set to 57600 baud, which is too slow for relaying state.

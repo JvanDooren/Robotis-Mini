@@ -20,7 +20,7 @@ import os
 import launch
 from webots_ros2_core.utils import ControllerLauncher
 from webots_ros2_core.webots_launcher import WebotsLauncher
-#from ament_index_python.packages import get_package_share_directory
+from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
     # Webots
@@ -32,8 +32,8 @@ def generate_launch_description():
     # Controller node
     synchronization = launch.substitutions.LaunchConfiguration('synchronization', default=False)
     controller = ControllerLauncher(
-        package='robotis_mini_description',
-        executable='robotis_mini_move_head',
+        package='head_node',
+        executable='talker',
         parameters=[{'synchronization': synchronization}],
         output='screen'
     )
