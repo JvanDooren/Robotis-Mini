@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(head_node)
+project(webots_bridge)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -15,7 +15,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-set(TARGET head_publisher)
+set(TARGET webots_bridge)
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
@@ -35,11 +35,15 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-add_executable(${TARGET} src/head_publisher.cpp)
-ament_target_dependencies(${TARGET} rclcpp)
+#add_executable(${TARGET} src/webots_bridge.cpp)
+#ament_target_dependencies(${TARGET} rclcpp)
+#target_include_directories(${TARGET}
+#  PUBLIC
+#    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+#    $<INSTALL_INTERFACE:include>)
 
-install(TARGETS
-  ${TARGET}
-  DESTINATION lib/${PROJECT_NAME})
+#install(TARGETS
+#  ${TARGET}
+#  DESTINATION lib/${PROJECT_NAME})
 
 ament_package()

@@ -1,3 +1,7 @@
+/**
+ * This node subscribes to the robotis mini nodes and transforms them into BT210 calls
+ * This targets the actual robot
+ */
 #include <chrono>
 #include <functional>
 #include <memory>
@@ -34,11 +38,16 @@ public:
             throw std::runtime_error("Failure to open serial port");
         }
         _publisher = this->create_publisher<Xl320StateMsg>(TOPIC_NAME, TOPIC_QUEUESIZE);
-        _timer = this->create_wall_timer(500ms, std::bind(&BT210Bridge::timer_callback, this));
+        _timer = this->create_wall_timer(500ms, [this]() {
+            auto message = Xl320StateMsg();
+            message.id = 17;
+            RCLCPP_INFO(get_logger(), "Publishing state of servo: '%d'", message.id);
+            _publisher->publish(message);
+        });
     }
 
 private:
-    static speed_t toSpeed(unsigned int baud) {
+    static speed_t toSpeed(unsigned int baud) noexcept {
         switch (baud) {
         case 9600:
             return B9600;
@@ -130,14 +139,6 @@ private:
             return;
         }
     }
-
-    void timer_callback()
-    {
-        auto message = Xl320StateMsg();
-        message.id = 17;
-        RCLCPP_INFO(this->get_logger(), "Publishing state of servo: '%d'", message.id);
-        _publisher->publish(message);
-    }
 };
 
 /**
@@ -145,8 +146,7 @@ private:
  * and connects to the BT-210. Once connected, it reads all data
  * and translates that to a ROS topic message after which it is published
  */
-int main(int argc, char * argv[])
-{
+int main(int argc, char * argv[]) {
     //TODO: pass serial port and speed via arguments
     rclcpp::init(argc, argv);
     rclcpp::spin(std::make_shared<BT210Bridge>());

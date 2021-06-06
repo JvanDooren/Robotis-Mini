@@ -33,7 +33,7 @@ def generate_launch_description():
     synchronization = launch.substitutions.LaunchConfiguration('synchronization', default=False)
     controller = ControllerLauncher(
         package='head_node',
-        executable='talker',
+        executable='head_publisher',
         parameters=[{'synchronization': synchronization}],
         output='screen'
     )
