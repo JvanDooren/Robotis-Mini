@@ -33,15 +33,29 @@ We're going to utilize Webots, so follow https://github.com/cyberbotics/webots_r
 
 A nice tutorial can be found at `https://www.youtube.com/watch?v=jU_FD1_zAqo&list=PLt69C9MnPchkP0ZXZOqmIGRTOch8o9GiQ`
 
+# Setup RQT
+
+This is a graphical user interface that can query and control ROS2 interfaces
+
+1. Install `sudo apt install ~nros-foxy-rqt*`
+2. Launch `rqt`
+
 # Launch the WeBots with our robot
 
 A convenience python scipt has been created to launch Webots and nodes. To make the nodes discoverable:
 `cd Robotis-Mini/webots_ws/robotis_mini`
 `. ../../ros2_ws/install/setup.bash`
 `ros2 launch robotis.launch.py`
-Once Webots is running, discover services: `ros2 service list`
 
-https://github.com/cyberbotics/webots_ros2
+OR
+
+`ros2 launch webots_ros2_core robot_launch.py world:={absolute-path-to}/Robotis-Mini/webots_ws/robotis_mini/worlds/empty.wbt`
+
+Once Webots is running, discover nodes: `ros2 node list`
+Once Webots is running, discover services: `ros2 service list`
+To discover what a service topic supports, query it: `ros2 service call [/service] [double tab]`
+Every service can now be queried for possibilities: `ros2 interface show [double tab]`
+Rtq is a visual tool that shows the same.
 
 ## Set BT-210 baudrate
 
