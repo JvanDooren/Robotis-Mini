@@ -42,6 +42,7 @@ This is a graphical user interface that can query and control ROS2 interfaces
 
 # Launch the WeBots with our robot
 
+Before we can start webots, install joint_state_publisher `sudo apt-get install ros-$ROS_DISTRO-joint-state-publisher ros-$ROS_DISTRO-joint-state-publisher-gui`
 A convenience python scipt has been created to launch Webots and nodes. To make the nodes discoverable:
 `cd Robotis-Mini/webots_ws/robotis_mini`
 `. ../../ros2_ws/install/setup.bash`
